@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { PostForm } from "./components/PostForm";
+import { PostList } from "./components/PostList";
 
-function App() {
+import posts from './api/posts.json';
+import users from './api/users.json';
+
+import { User } from "./types/User";
+import { Post } from "./types/Post";
+
+const initiaPosts: Post[] = posts.map(post => {
+  return {...post, user: getUserById(post.userId)};
+})
+
+function getUserById(userId: number): User | null {
+   return users.find(user => user.id === userId) || null;
+}
+
+ export const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="section">
+       <h1 className="title">Create a post</h1>
+       
+       <PostForm />
+       <PostList posts={initiaPosts} />
     </div>
   );
 }
-
-export default App;
