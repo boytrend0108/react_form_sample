@@ -21,7 +21,7 @@ export const PostList:React.FC<Props> = ({ posts }) => {
         <tr key={post.id}>
           <td>{post.id}</td>
           <td>{post.title}</td>
-          <td>{post.userId}</td>
+          <td>{post.user?.name}</td>
         </tr>
       ))}
     </tbody>
